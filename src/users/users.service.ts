@@ -10,6 +10,7 @@ import { CreateUserDto } from './dtos/create-user.dto';
 import { User } from './user.entity';
 import { UserRole } from './user-roles.enum';
 import { UpdateUserDto } from './dtos/update-users.dto';
+import { FindUsersQueryDto } from './dtos/find-users-query.dto';
 
 @Injectable()
 export class UsersService {
@@ -60,5 +61,12 @@ export class UsersService {
         'Não foi encontrado um usuário com o ID informado',
       );
     }
+  }
+
+  async findUsers(
+    queryDto: FindUsersQueryDto,
+  ): Promise<{ users: User[]; total: number }> {
+    const users = await this.userRepository.findUsers(queryDto);
+    return users;
   }
 }
