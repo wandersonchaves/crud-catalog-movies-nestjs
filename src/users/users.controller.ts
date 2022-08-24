@@ -6,6 +6,9 @@ import {
   UseGuards,
   Get,
   Param,
+  Patch,
+  ForbiddenException,
+  Delete,
 } from '@nestjs/common';
 import { CreateUserDto } from './dtos/create-user.dto';
 import { UsersService } from './users.service';
@@ -14,6 +17,9 @@ import { AuthGuard } from '@nestjs/passport';
 import { RolesGuard } from '../auth/roles.guard';
 import { Role } from '../auth/role.decorator';
 import { UserRole } from './user-roles.enum';
+import { GetUser } from 'src/auth/get-user.decorator';
+import { User } from './user.entity';
+import { UpdateUserDto } from './dtos/update-users.dto';
 
 @Controller('users')
 @UseGuards(AuthGuard(), RolesGuard)
@@ -39,6 +45,30 @@ export class UsersController {
     return {
       user,
       message: 'Usuário encontrado',
+    };
+  }
+
+  @Patch(':id')
+  async updateUser(
+    @Body(ValidationPipe) updateUserDto: UpdateUserDto,
+    @GetUser() user: User,
+    @Param('id') id: string,
+  ) {
+    if (user.role != UserRole.ADMIN && user.id.toString() != id) {
+      throw new ForbiddenException(
+        'Você não tem autorização para acessar esse recurso',
+      );
+    } else {
+      return this.usersService.updateUser(updateUserDto, id);
+    }
+  }
+
+  @Delete(':id')
+  @Role(UserRole.ADMIN)
+  async deleteUser(@Param('id') id: string) {
+    await this.usersService.deleteUser(id);
+    return {
+      message: 'Usuário removido com sucesso',
     };
   }
 }
