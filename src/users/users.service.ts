@@ -66,7 +66,6 @@ export class UsersService {
   async findUsers(
     queryDto: FindUsersQueryDto,
   ): Promise<{ users: User[]; total: number }> {
-    const users = await this.userRepository.findUsers(queryDto);
-    return users;
+    return this.userRepository.findUsers(queryDto);
   }
 }

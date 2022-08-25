@@ -2,13 +2,13 @@ import { IsString, IsOptional } from 'class-validator';
 export class UpdateMovieDto {
   @IsOptional()
   @IsString({
-    message: 'Informe um titulo de filme válido',
+    message: 'Informe um título de filme válido',
   })
   title: string;
 
   @IsOptional()
   @IsString({
-    message: 'Informe uma descricao de filme válido',
+    message: 'Informe uma descrição de filme válido',
   })
   description: string;
 
@@ -20,7 +20,7 @@ export class UpdateMovieDto {
 
   @IsOptional()
   @IsString({
-    message: 'Informe um genero de filme válido',
+    message: 'Informe um gênero de filme válido',
   })
   genre: string;
 

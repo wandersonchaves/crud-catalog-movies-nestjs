@@ -17,7 +17,7 @@ export class MoviesService {
   ) {}
 
   async createMovie(createMovieDto: CreateMovieDto): Promise<Movie> {
-    return await this.movieRepository.createMovie(createMovieDto);
+    return this.movieRepository.createMovie(createMovieDto);
   }
 
   async findMovieById(movieId: string): Promise<Movie> {

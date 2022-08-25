@@ -5,7 +5,6 @@ import {
   ValidationPipe,
   Get,
   UseGuards,
-  Req,
 } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { CreateUserDto } from '../users/dtos/create-user.dto';
@@ -32,7 +31,7 @@ export class AuthController {
   async signIn(
     @Body(ValidationPipe) credentiaslsDto: CredentialsDto,
   ): Promise<{ token: string }> {
-    return await this.authService.signIn(credentiaslsDto);
+    return this.authService.signIn(credentiaslsDto);
   }
 
   @Get('/me')

@@ -6,7 +6,12 @@ import { AuthModule } from './auth/auth.module';
 import { MoviesModule } from './movies/movies.module';
 
 @Module({
-  imports: [TypeOrmModule.forRoot(typeOrmConfig), UsersModule, AuthModule, MoviesModule],
+  imports: [
+    TypeOrmModule.forRoot(typeOrmConfig),
+    UsersModule,
+    AuthModule,
+    MoviesModule,
+  ],
   controllers: [],
   providers: [],
 })

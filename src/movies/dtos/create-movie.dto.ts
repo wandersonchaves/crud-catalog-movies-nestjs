@@ -1,24 +1,24 @@
-import { IsEmail, IsNotEmpty, MaxLength, MinLength } from 'class-validator';
+import { IsNotEmpty, MaxLength, MinLength } from 'class-validator';
 
 export class CreateMovieDto {
   @IsNotEmpty({
-    message: 'Informe um titulo do filme',
+    message: 'Informe o título do filme',
   })
   @MaxLength(200, {
-    message: 'O titulo do filme deve ter menos de 200 caracteres',
+    message: 'O título do filme deve ter menos de 200 caracteres',
   })
   title: string;
 
   @IsNotEmpty({
-    message: 'Informe a descricao do filme',
+    message: 'Informe a descrição do filme',
   })
   @MaxLength(200, {
-    message: 'A descricao do filme deve ter menos de 200 caracteres',
+    message: 'A descrição do filme deve ter menos de 200 caracteres',
   })
   description: string;
 
   @IsNotEmpty({
-    message: 'Informe um diretor do filme',
+    message: 'Informe o diretor do filme',
   })
   @MinLength(6, {
     message: 'O diretor do filme deve ter no mínimo 6 caracteres',
@@ -26,18 +26,18 @@ export class CreateMovieDto {
   director: string;
 
   @IsNotEmpty({
-    message: 'Informe o genero do filme',
+    message: 'Informe o gênero do filme',
   })
   @MinLength(6, {
-    message: 'O genero do filme deve ter no mínimo 6 caracteres',
+    message: 'O gênero do filme deve ter no mínimo 6 caracteres',
   })
   genre: string;
 
   @IsNotEmpty({
-    message: 'Informe o actor do filme',
+    message: 'Informe o ator do filme',
   })
   @MinLength(6, {
-    message: 'O actor do filme deve ter no mínimo 6 caracteres',
+    message: 'O ator do filme deve ter no mínimo 6 caracteres',
   })
   actor: string;
 }

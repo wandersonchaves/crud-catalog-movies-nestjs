@@ -23,7 +23,7 @@ export class AuthService {
     if (createUserDto.password != createUserDto.passwordConfirmation) {
       throw new UnprocessableEntityException('As senhas não conferem');
     } else {
-      return await this.userRepository.createUser(createUserDto, UserRole.USER);
+      return this.userRepository.createUser(createUserDto, UserRole.USER);
     }
   }
 
@@ -37,7 +37,7 @@ export class AuthService {
     const jwtPayload = {
       id: user.id,
     };
-    const token = await this.jwtService.sign(jwtPayload);
+    const token = this.jwtService.sign(jwtPayload);
 
     return { token };
   }
