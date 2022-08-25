@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Delete,
   ForbiddenException,
   Get,
   Param,
@@ -10,7 +11,6 @@ import {
   ValidationPipe,
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
-import { Role } from 'src/auth/role.decorator';
 import { RolesGuard } from 'src/auth/roles.guard';
 import { CreateMovieDto } from './dtos/create-movie.dto';
 import { ReturnMovieDto } from './dtos/return-movie.dto';
@@ -57,5 +57,13 @@ export class MoviesController {
     } else {
       return this.moviesService.updateMovie(updateMovieDto, id);
     }
+  }
+
+  @Delete(':id')
+  async deleteUser(@Param('id') id: string) {
+    await this.moviesService.deleteUser(id);
+    return {
+      message: 'Filme removido com sucesso',
+    };
   }
 }

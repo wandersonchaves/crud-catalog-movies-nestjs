@@ -52,4 +52,13 @@ export class MoviesService {
       );
     }
   }
+
+  async deleteUser(userId: string) {
+    const result = await this.movieRepository.delete({ id: userId });
+    if (result.affected === 0) {
+      throw new NotFoundException(
+        'Não foi encontrado um filme com o ID informado',
+      );
+    }
+  }
 }
