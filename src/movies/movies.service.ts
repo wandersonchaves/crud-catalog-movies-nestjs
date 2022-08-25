@@ -53,8 +53,8 @@ export class MoviesService {
     }
   }
 
-  async deleteUser(userId: string) {
-    const result = await this.movieRepository.delete({ id: userId });
+  async deleteMovie(movieId: string) {
+    const result = await this.movieRepository.delete({ id: movieId });
     if (result.affected === 0) {
       throw new NotFoundException(
         'Não foi encontrado um filme com o ID informado',

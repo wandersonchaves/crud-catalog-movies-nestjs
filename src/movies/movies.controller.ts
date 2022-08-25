@@ -60,8 +60,8 @@ export class MoviesController {
   }
 
   @Delete(':id')
-  async deleteUser(@Param('id') id: string) {
-    await this.moviesService.deleteUser(id);
+  async deleteMovie(@Param('id') id: string) {
+    await this.moviesService.deleteMovie(id);
     return {
       message: 'Filme removido com sucesso',
     };
