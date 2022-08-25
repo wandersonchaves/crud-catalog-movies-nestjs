@@ -1,4 +1,11 @@
-import { Body, Controller, Post, ValidationPipe } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Post,
+  UseGuards,
+  ValidationPipe,
+} from '@nestjs/common';
+import { AuthGuard } from '@nestjs/passport';
 import { CreateMovieDto } from './dtos/create-movie.dto';
 import { ReturnMovieDto } from './dtos/return-movie.dto';
 import { MoviesService } from './movies.service';
@@ -8,6 +15,7 @@ export class MoviesController {
   constructor(private moviesService: MoviesService) {}
 
   @Post()
+  @UseGuards(AuthGuard())
   async createMovie(
     @Body(ValidationPipe) createMovieDto: CreateMovieDto,
   ): Promise<ReturnMovieDto> {
